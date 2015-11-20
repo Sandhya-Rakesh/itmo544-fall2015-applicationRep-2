@@ -27,8 +27,7 @@
 			exit();
 		}
 		
-		$link->real_query("SELECT * FROM userdetails where email='$email'");
-		$res = $link->use_result();
+		$res = $link->query("SELECT * FROM userdetails where email='$email'");
 		echo "Result set order...\n";
 		
 		if ($res->num_rows != 0) {

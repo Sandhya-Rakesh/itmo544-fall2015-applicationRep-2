@@ -83,7 +83,7 @@
 	$s3finishedurl = "none";
 	$status =0;
 	
-	$stmt->bind_param("ssssi",$userid,$s3rawurl,$s3finishedurl,$filename,$status);
+	$stmt->bind_param("isssi",$userid,$s3rawurl,$s3finishedurl,$filename,$status);
 	if (!$stmt->execute()) {
 		echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 	} else {

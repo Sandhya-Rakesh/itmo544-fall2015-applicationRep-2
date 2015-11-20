@@ -4,19 +4,18 @@
 ?>
 
 <div id="container" style="min-height:600px;padding-left:15%;padding-right:15%;padding-top:2%">
-
+	<?php 
+		if(isset($_GET['up']) && $_GET['up'] == 1)
+		{
+	?>
+	<div style="padding:2px;width:100%;background-color:#FFF9F7;color:#DD0A58;text-align:center;float:left;border:1px solid #CD0A0A;">
+		You have successfully signed up. Please check your email if you have subscribed for email notifications.
+	</div>
+	<?php
+		}
+	?>
 	<form enctype="multipart/form-data" id="uploadImage" action="submit.php" method="POST">
 		<div id="uploadBlock" style="padding-left:15%;padding-right:15%;padding-top:10%;padding-bottom:10%">
-			<?php 
-				if(isset($_GET['up']) && $_GET['up'] == 1)
-				{
-			?>
-			<div style="padding:2px;width:100%;background-color:#FFF9F7;color:#DD0A58;text-align:center;float:left;border:1px solid #CD0A0A;">
-				You have successfully signed up. Please check your email if you have subscribed for email notifications.
-			</div>
-			<?php
-				}
-			?>
 			<!-- MAX_FILE_SIZE must precede the file input field -->
 			<input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
 			<!-- Name of input element determines name in $_FILES array -->
