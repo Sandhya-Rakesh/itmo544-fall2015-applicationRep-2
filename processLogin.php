@@ -31,7 +31,7 @@
 		$res = $link->use_result();
 		echo "Result set order...\n";
 		
-		if (($res->field_count) > 1) {
+		if ($res->num_rows != 0) {
 			while ($row = $res->fetch_assoc()) {  
 					if(!isset($row['email']))
 					{
@@ -61,7 +61,7 @@
 			$host  = $_SERVER['HTTP_HOST'];
 			$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\'); 
 			$extra = 'signup.php';
-			header("Location: http://$host$uri/$extra");
+			header("Location: http://$host$uri/$extra?su=1");
 		}
 		
 		$link->close();

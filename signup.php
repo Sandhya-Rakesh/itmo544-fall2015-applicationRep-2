@@ -4,6 +4,16 @@
 ?>
 
 <div id="container" style="min-height:600px;padding-left:15%;padding-right:15%;padding-top:2%">
+	<?php 
+	if(isset($_GET['su']) && $_GET['su'] == 1)
+	{
+	?>
+	<div style="padding:2px;width:100%;background-color:#FFF9F7;color:#DD0A58;text-align:center;float:left;border:1px solid #CD0A0A;">
+		First time user, Please sign up.
+	</div>
+	<?php
+	}
+	?>
 	<form name="signupform" id="signupform" method="post" action="processSignUp.php">
 		<div id="signUpBlock" style="padding-left:15%;padding-right:15%;padding-top:5%;padding-bottom:10%">
 			<h3>Enter User Details</h3>

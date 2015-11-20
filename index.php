@@ -13,7 +13,7 @@
 	</div>
 	<?php
 	}
-	?>cd ..
+	?>
 	<form name="login" id="login" method="post" action="processLogin.php">
 		<div id="loginBlock" style="padding-left:15%;padding-right:15%;padding-top:10%;padding-bottom:10%">
 			<label for="useremail" style="text-align:center;font-family:calibri;font-weight:bold;font-size:110%"]>Enter your email: </label>
