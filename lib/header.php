@@ -4,6 +4,11 @@ session_start();
 
 <html>
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        	<link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+        	<link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.image-gallery/3.1.0/css/bootstrap-image-gallery.css">
+        	<link rel="stylesheet" href="../content/css/demo.css">
 		<link rel="stylesheet" type="text/css" href="header.css">
 		<title>Gallery Application</title>
 	</head>
@@ -23,6 +28,20 @@ session_start();
 					Make your images beautiful
 				</div>
 				<!-- End of Tag line -->
+				<!-- Menu Tabs -->
+				<div id="menu" style="padding-left:65%;">
+					<ul style="list-style-type:none;margin:0">
+					<?php
+					if(isset($_SESSION['useremail']))
+					{
+					?>
+						<li style="display:inline;padding-left:10%"><a href="http://<?php echo $_SERVER["HTTP_HOST"];?>/../logout.php" style="text-decoration:none;text-align:center;color:FFFFCC;font-weight:bold;">Logout</a></li>
+					<?php
+					}
+					?>
+					</ul>
+				</div>
+				<!-- End of Menu Tabs -->
 			</div>
 		</div>
 		<!--End of Header -->
