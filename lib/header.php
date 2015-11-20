@@ -8,7 +8,6 @@ session_start();
 	        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         	<link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
         	<link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.image-gallery/3.1.0/css/bootstrap-image-gallery.css">
-        	<link rel="stylesheet" href="../content/css/demo.css">
 		<link rel="stylesheet" type="text/css" href="header.css">
 		<title>Gallery Application</title>
 	</head>
@@ -16,7 +15,7 @@ session_start();
 		<!-- Header -->
 		<div id="header" style="height:100px;background-color:97B95A">
 			<div id="image" style="width:5%">
-				<IMG style="height:60px;width:100%;margin-top:20px;float:left" SRC= "http://<?php echo $_SERVER["HTTP_HOST"];?>/galleryapp/content/images/IIT_Scarlet_Hawks.svg.png">
+				<IMG style="height:60px;width:100%;margin-top:20px;float:left" SRC= "http://<?php echo $_SERVER["HTTP_HOST"];?>/content/images/IIT_Scarlet_Hawks.svg.png">
 			</div>
 			
 			<div id="text" style="width=95%">
