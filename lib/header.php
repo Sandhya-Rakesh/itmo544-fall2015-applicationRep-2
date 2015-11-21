@@ -36,6 +36,7 @@ session_start();
 					?>
 						<li style="display:inline;padding-left:10%"><a href="http://<?php echo $_SERVER["HTTP_HOST"];?>/../logout.php" style="text-decoration:none;text-align:center;color:FFFFCC;font-weight:bold;">Logout</a></li>
 						<li style="display:inline;padding-left:10%"><a href="http://<?php echo $_SERVER["HTTP_HOST"];?>/../uploadimage.php" style="text-decoration:none;text-align:center;color:FFFFCC;font-weight:bold;">Upload Image</a></li>
+						<li style="display:inline;padding-left:10%"><a href="http://<?php echo $_SERVER["HTTP_HOST"];?>/../gallery.php" style="text-decoration:none;text-align:center;color:FFFFCC;font-weight:bold;">Gallery</a></li>
 					<?php
 					}
 					?>
