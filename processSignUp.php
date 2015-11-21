@@ -38,7 +38,7 @@
 		echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
 	} else {
 		printf("%d Row inserted into userdetails table.\n", $stmt->affected_rows);
-		$_SESSION["userid"] = mysql_insert_id();
+		$_SESSION["userid"] = mysqli_insert_id($link);
 		$_SESSION["username"] = $uname;
 		$_SESSION["useremail"] = $email;
 		$_SESSION["usersubscription"] = $subscription;	
@@ -52,7 +52,7 @@
 	$stmt->close();
 	
 	
-	if ($subscription = 'Y')
+	if ($subscription == "Y")
 	{
 		$link->real_query("SELECT snsarn FROM snsdetails where snsdisplayname='mp2UploadImages-sg'");
 		$res = $link->use_result();
