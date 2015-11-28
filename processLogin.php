@@ -14,7 +14,7 @@
 		]);
 		
 		$result = $rds->describeDBInstances([
-			'DBInstanceIdentifier' => 'mp1-sg',
+			'DBInstanceIdentifier' => 'mp-sg-rr',
 		]);
 		
 		$endpoint = $result['DBInstances'][0]['Endpoint']['Address'];
