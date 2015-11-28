@@ -35,17 +35,32 @@
 	<div id="signUpBlock" style="padding-left:15%;padding-right:15%;padding-top:5%;padding-bottom:10%">
 		<h3>Image Gallery</h3>
 		<br/>
+		<h4> Raw Images </h4>
+		<br/>
 		<div id="imagelinks">
 			<?php
 				//echo "Result set order...\n";
 				while ($row = $res->fetch_assoc())
-                {
+                		{
 					echo '<a href="' . $row["s3rawurl"] . '" title="' . $row["jpgfilename"] . '"data-gallery><img src="' . $row["s3rawurl"] . '"width="75" height="75"></a>';
 				}
-                $link->close();
+                		//$link->close();
 			?>
 		</div>
-		<br>
+		<br/>
+		<h4> Reflection Images (Finished Images) </h4>
+		<br/>
+		<div id="finishedimagelinks">
+			<?php
+				//echo "Result set order...\n";
+				while ($row = $res->fetch_assoc())
+                		{
+					echo '<a href="' . $row["s3finishedurl"] . '" title="' . $row["jpgfilename"] . '"data-gallery><img src="' . $row["s3rawurl"] . '"width="75" height="75"></a>';
+				}
+                		$link->close();
+			?>
+		</div>
+		<br/>
 		 <div id="blueimp-gallery" class="blueimp-gallery">
                 <!-- The container for the modal slides -->
                 <div class="slides"></div>

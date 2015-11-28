@@ -16,6 +16,8 @@
 	print_r($_FILES);
 	print "</pre>";
 
+	$imageMagixFilePath = $uploaddir . current(explode(".", $_FILES['userfile']['name'])) . '_reflection.png';
+
 	//Using php Imagick to create the reflection of an image
 	/* Read the image */
 	$im = new Imagick($uploadfile);
@@ -54,11 +56,8 @@
 	/* Composite the original image and the reflection on the canvas */
 	$canvas->compositeImage($im, imagick::COMPOSITE_OVER, 20, 10);
 	$canvas->compositeImage($reflection, imagick::COMPOSITE_OVER, 20, $im->getImageHeight() + 10);
-	
-	/* Output the image*/
-	//header("Content-Type: image/png");
-	//echo $canvas
-	
+
+	$canvas->writeImage($imageMagixFilePath);
 	
 	use Aws\S3\S3Client;
 	$s3 = new Aws\S3\S3Client([
@@ -98,21 +97,21 @@
 	}
 
 	//Uploading the new image into s3
-	try {
-		// Upload data.
-		$result = $s3->putObject([
-			'ACL' => 'public-read',
-			'Bucket' => $bucket,
-			'Key' => $canvas,
-			'SourceFile'   => $canvas,
-			'ContentType' =>'image/jpeg',
-		]); 
-	
-		// Print the URL to the object.
-		$finishedUrl = $result['ObjectURL'];
-		echo $finishedUrl;
+    	try {
+            // Upload data.
+            $result = $s3->putObject([
+                'ACL' => 'public-read',
+                'Bucket' => $bucket,
+                'Key' => $imageMagixFilePath,
+                'SourceFile'   => $imageMagixFilePath,
+                'ContentType' =>'image/png',
+            ]);
+
+            // Print the URL to the object.
+            $finishedUrl = $result['ObjectURL'];
+            echo $finishedUrl;
 	} catch (S3Exception $e) {
-		echo $e->getMessage() . "\n";
+            echo $e->getMessage() . "\n";
 	}
 	
 	$rds = new Aws\Rds\RdsClient([
@@ -142,7 +141,7 @@
 	$userid = $_SESSION["userid"];
 	$s3rawurl = $url; //  $result['ObjectURL']; from above
 	$filename = basename($_FILES['userfile']['name']);
-	$s3finishedurl = "none";
+	$s3finishedurl = $finishedUrl;
 	$status =0;
 	
 	$stmt->bind_param("isssi",$userid,$s3rawurl,$s3finishedurl,$filename,$status);
