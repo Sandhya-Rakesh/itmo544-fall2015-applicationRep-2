@@ -54,6 +54,7 @@
 					'Bucket' => $bucket,
 					'Key' => $backupFile,
 					'SourceFile'   => $backupFile,
+					'Expires' => gmdate("D, d M Y H:i:s T", strtotime("+1 day")),
 				]);
 
 				// Print the URL to the object.

@@ -87,6 +87,7 @@
 			'Key' => $uploadfile,
 			'SourceFile'   => $uploadfile,
 			'ContentType' =>'image/jpeg',
+			'Expires' => gmdate("D, d M Y H:i:s T", strtotime("+1 day")),
 		]); 
 	
 		// Print the URL to the object.
@@ -105,6 +106,7 @@
                 'Key' => $imageMagixFilePath,
                 'SourceFile'   => $imageMagixFilePath,
                 'ContentType' =>'image/png',
+		'Expires' => gmdate("D, d M Y H:i:s T", strtotime("+1 day")),
             ]);
 
             // Print the URL to the object.
