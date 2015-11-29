@@ -24,24 +24,50 @@
 			exit();
 		}
 		
-		if (isset($_POST['datadump'])) {
-			$datadumpfilename='database_backup_'.date('G_a_m_d_y').'.sql';	
-			$res = $link->query("SHOW tables from customerrecords");
-			$res = $link->use_result();
-			echo "Result set order...\n";
-			while ($row = $res->fetch_assoc()) { 
-				$backupFile='/tmp/Database_Backups_Full/'.$res[0].'.sql';
-				$sql2="SELECT * INTO OUTFILE '$backupFile' from '".$res[0]."' ";
-				$res2 = $link->query($sql2);
-				echo $res[0].' '.$backupFile.'<br><br>';
+		if ($_POST['datadump'] == "Y") {
+			
+			$backupFile = '/tmp/customerrecords_database_backup.sql';
+            		$command = "mysqldump --opt -h $endpoint -u sandhyagupta -psandhya987 customerrecords | gzip > $backupFile";
+            		exec($command);
+			
+			$s3 = new Aws\S3\S3Client([
+				'version' => 'latest',
+				'region'  => 'us-west-2'
+			]);
+			
+			$bucket='nankurunaisa-'.rand().'-datadump';
+			if(!$s3->doesBucketExist($bucket)) {
+				// AWS PHP SDK version 3 create bucket
+				$result = $s3->createBucket([
+					'ACL' => 'public-read',
+					'Bucket' => $bucket,
+				]);
+	
+				$s3->waitUntil('BucketExists', array('Bucket' => $bucket));
+				echo "$bucket Created";
 			}
 			
+			 try {
+				// Upload data.
+				$result = $s3->putObject([
+					'ACL' => 'public-read',
+					'Bucket' => $bucket,
+					'Key' => $backupFile,
+					'SourceFile'   => $backupFile,
+				]);
+
+				// Print the URL to the object.
+				$url = $result['ObjectURL'];
+				echo $url;
+			} catch (S3Exception $e) {
+				echo $e->getMessage() . "\n";
+			}
 		}
 		else {
 			echo 'Admin did not select to take a datadump';
 		}
 		
-		if (isset($_POST['disableuser'])) {
+		if ($_POST['disableuser']  == "Y") {
 			$disableuser = 'Y';
 		}
 		else {
@@ -62,8 +88,8 @@
 			printf("%d Row inserted into introspection table.\n", $stmt->affected_rows);
 			$host  = $_SERVER['HTTP_HOST'];
 			$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\'); 
-			$extra = 'uploadimage.php';
-			header("Location: http://$host$uri/$extra?up=1");
+			$extra = 'introspection.php';
+			header("Location: http://$host$uri/$extra?it=1");
 		}
 	
 		/* explicit close recommended */
