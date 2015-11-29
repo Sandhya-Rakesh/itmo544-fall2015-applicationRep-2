@@ -26,16 +26,23 @@
 		exit();
 	}
 	
-	$link->real_query("SELECT * FROM usergallerydetails where userid='$userid'");
-	$res = $link->use_result();
-
+	if(isset($_SESSION['userid']) && !empty($_SESSION['userid'])) {
+		//echo 'User has signed in successfully!';
+		$link->real_query("SELECT * FROM usergallerydetails where userid='$userid'");
+		$res = $link->use_result();
+	}
+	else {
+		//echo 'User has not signed in!';
+		$link->real_query("SELECT * FROM usergallerydetails");
+		$res = $link->use_result();
+	}
 ?>
 
 <div id="container" style="min-height:600px;padding-left:15%;padding-right:15%;padding-top:2%">
 	<div id="signUpBlock" style="padding-left:15%;padding-right:15%;padding-top:5%;padding-bottom:10%">
 		<h3>Image Gallery</h3>
 		<br/>
-		<h4> Raw Images </h4>
+		<h4> Raw Images and Finished Images</h4>
 		<br/>
 		<div id="imagelinks">
 			<?php
@@ -43,25 +50,13 @@
 				while ($row = $res->fetch_assoc())
                 		{
 					echo '<a href="' . $row["s3rawurl"] . '" title="' . $row["jpgfilename"] . '"data-gallery><img src="' . $row["s3rawurl"] . '"width="75" height="75"></a>';
-				}
-                		//$link->close();
-			?>
-		</div>
-		<br/>
-		<h4> Reflection Images (Finished Images) </h4>
-		<br/>
-		<div id="finishedimagelinks">
-			<?php
-				//echo "Result set order...\n";
-				while ($row = $res->fetch_assoc())
-                		{
 					echo '<a href="' . $row["s3finishedurl"] . '" title="' . $row["jpgfilename"] . '"data-gallery><img src="' . $row["s3finishedurl"] . '"width="75" height="75"></a>';
 				}
                 		$link->close();
 			?>
 		</div>
 		<br/>
-		 <div id="blueimp-gallery" class="blueimp-gallery">
+		<div id="blueimp-gallery" class="blueimp-gallery">
                 <!-- The container for the modal slides -->
                 <div class="slides"></div>
                 <!-- Controls for the borderless lightbox -->
@@ -71,8 +66,8 @@
                 <a class="close">×</a>
                 <a class="play-pause"></a>
                 <ol class="indicator"></ol>
-				<!-- The modal dialog, which will be used to wrap the lightbox content -->
-				<div class="modal fade">
+		<!-- The modal dialog, which will be used to wrap the lightbox content -->
+		<div class="modal fade">
                         <div class="modal-dialog">
                                 <div class="modal-content">
                                         <div class="modal-header">
@@ -94,12 +89,12 @@
                         </div>
                 </div>
         </div>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <!-- Bootstrap JS is not required, but included for the responsive demo navigation and button states -->
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/bootstrap.image-gallery/3.1.0/js/bootstrap-image-gallery.js"></script>
-		<script src="content/js/demo.js"></script>		
+	<script src="content/js/demo.js"></script>		
 	</div>
 
 </div>

@@ -25,7 +25,7 @@
 	
 	$link->real_query("SELECT * FROM introspection ORDER BY introid desc LIMIT 1");
 	$res = $link->use_result();
-	echo "Result set order...\n";
+	//echo "Result set order...\n";
 	while ($row = $res->fetch_assoc()) {  
 		$disableuser = $row['introspectionavailable'];
 	}
