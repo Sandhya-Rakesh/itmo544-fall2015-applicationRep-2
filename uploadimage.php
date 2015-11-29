@@ -37,7 +37,7 @@
 		{
 	?>
 	<div style="padding:2px;width:100%;background-color:#FFF9F7;color:#DD0A58;text-align:center;float:left;border:1px solid #CD0A0A;">
-		Admin has disabled the user uploads currently.
+		Admin has disabled the user uploads currently. Please proceed to the gallery.
 	</div>	
 	<?php 
 		} else
